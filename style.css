@@ -1,0 +1,193 @@
+:root {
+    --bg-color: #0a0e17;
+    --surface-color: #111827;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --accent-finance: #10b981; /* FinTech Green */
+    --accent-tech: #3b82f6; /* Tech Blue */
+    --grid-color: rgba(59, 130, 246, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Blueprint Grid Background for the Map */
+.map-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    height: 100vh;
+    background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    background: rgba(10, 14, 23, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+nav a:hover, nav a.active {
+    color: var(--accent-finance);
+}
+
+/* SVG Map Styling */
+svg {
+    width: 90%;
+    height: 90%;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+}
+.building {
+    fill: var(--surface-color);
+    stroke: #1f2937;
+    stroke-width: 2;
+    transition: all 0.5s ease;
+}
+.building.active {
+    stroke: var(--accent-finance);
+    fill: rgba(16, 185, 129, 0.1);
+    filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4));
+}
+.building-label {
+    fill: var(--text-secondary);
+    font-size: 14px;
+    font-family: monospace;
+    transition: fill 0.3s ease;
+}
+.building.active + .building-label {
+    fill: var(--text-primary);
+    font-weight: bold;
+}
+
+/* The Animated Path */
+.campus-path {
+    fill: none;
+    stroke: var(--accent-finance);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+}
+.poi-dot {
+    fill: var(--bg-color);
+    stroke: var(--text-secondary);
+    stroke-width: 3;
+    transition: all 0.4s ease;
+}
+.poi-dot.active {
+    stroke: var(--accent-tech);
+    fill: var(--accent-tech);
+    r: 10;
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
+}
+
+/* Content Container */
+.content-container {
+    margin-left: 50vw;
+    width: 50vw;
+    position: relative;
+    z-index: 2;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 10%;
+    opacity: 0.3;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(20px);
+}
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Typography */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 5px;
+    background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+h2 {
+    color: var(--accent-tech);
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: monospace;
+}
+p, li {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+.tech-stack {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.tag {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-tech);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-family: monospace;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.link-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: var(--accent-finance);
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+.link-btn:hover {
+    background: #0ea5e9;
+}
