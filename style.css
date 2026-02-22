@@ -22,7 +22,7 @@ body, html {
     overflow-x: hidden;
 }
 
-/* Blueprint Grid Background for the Map */
+/* Blueprint Grid Background for the Map Container */
 .map-container {
     position: fixed;
     top: 0;
@@ -72,13 +72,31 @@ nav a:hover, nav a.active {
 svg {
     width: 90%;
     height: 90%;
-    filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+    /* Removed overall drop shadow to keep background subtle */
 }
+
+/* NEW: Background Blueprint Buildings (Inactive context) */
+.bg-building {
+    fill: rgba(17, 24, 39, 0.8); /* Very dark, slightly transparent fill */
+    stroke: rgba(59, 130, 246, 0.15); /* Faint blue stroke */
+    stroke-width: 1;
+}
+/* Updated Ring Road Guide Style */
+.ring-road-guide {
+    fill: none;
+    stroke: rgba(59, 130, 246, 0.1); /* Very faint */
+    stroke-width: 15;
+}
+
+/* The Active Target Buildings */
 .building {
     fill: var(--surface-color);
     stroke: #1f2937;
     stroke-width: 2;
     transition: all 0.5s ease;
+    /* Ensure these sit visually above background */
+    position: relative; 
+    z-index: 10;
 }
 .building.active {
     stroke: var(--accent-finance);

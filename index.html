@@ -9,46 +9,54 @@
 <body>
 
     <nav>
-        <a href="#dorm" class="nav-link" data-target="dorm">Start</a>
-        <a href="#math-building" class="nav-link" data-target="math-building">Academics</a>
-        <a href="#lab" class="nav-link" data-target="lab">Projects</a>
-        <a href="#library" class="nav-link" data-target="library">Research</a>
-        <a href="#slc" class="nav-link" data-target="slc">Contact</a>
+        <a href="#cmh-start" class="nav-link" data-target="cmh-start">Start</a>
+        <a href="#mc" class="nav-link" data-target="mc">MC</a>
+        <a href="#dp" class="nav-link" data-target="dp">Dana Porter</a>
+        <a href="#stc" class="nav-link" data-target="stc">STC</a>
+        <a href="#cmh-end" class="nav-link" data-target="cmh-end">Contact</a>
     </nav>
 
     <div class="map-container">
-        <svg viewBox="0 0 600 900">
-            <polygon id="poly-dorm" class="building" points="100,100 200,100 220,150 120,150" />
-            <text x="135" y="130" class="building-label">UWP Dorm</text>
+        <svg viewBox="0 0 800 1000">
             
-            <polygon id="poly-math-building" class="building" points="400,250 520,250 520,350 400,350" />
-            <text x="430" y="305" class="building-label">MC / DC</text>
-
-            <polygon id="poly-lab" class="building" points="150,450 300,450 300,550 200,550 200,500 150,500" />
-            <text x="190" y="505" class="building-label">FinTech Lab</text>
-
-            <polygon id="poly-library" class="building" points="420,600 500,600 500,750 420,750" />
-            <text x="435" y="680" class="building-label">Dana Porter</text>
-
-            <polygon id="poly-slc" class="building" points="150,750 250,700 350,750 250,800" />
-            <text x="235" y="755" class="building-label">SLC</text>
-
-            <path id="route-path" class="campus-path" d="M 160 125 Q 300 125 460 250 T 225 500 Q 400 500 460 675 T 250 750" />
+            <polygon class="bg-building" points="250,200 550,200 650,400 600,700 200,700 150,400" />
             
-            <circle id="dot-dorm" cx="160" cy="125" r="6" class="poi-dot" />
-            <circle id="dot-math-building" cx="460" cy="250" r="6" class="poi-dot" />
-            <circle id="dot-lab" cx="225" cy="500" r="6" class="poi-dot" />
-            <circle id="dot-library" cx="460" cy="675" r="6" class="poi-dot" />
-            <circle id="dot-slc" cx="250" cy="750" r="6" class="poi-dot" />
+            <polygon class="bg-building" points="680,250 780,250 780,600 680,550" />
+            
+            <polygon class="bg-building" points="50,550 180,550 220,800 50,800" />
+             
+            <polygon class="bg-building" points="600,750 780,750 780,950 600,950" />
+
+            <path class="ring-road-guide" d="M 400 150 C 650 150, 750 400, 650 750 C 550 950, 250 950, 150 750 C 50 400, 150 150, 400 150 Z" />
+
+
+            <path id="route-path" class="campus-path" d="M 670 830 Q 550 600 260 330 Q 230 450 320 580 Q 400 580 520 530 Q 600 700 670 830" />
+
+            <polygon id="poly-cmh" class="building" points="630,830 710,830 710,890 630,890" />
+            <text x="655" y="865" class="building-label">CMH</text>
+
+            <polygon id="poly-mc" class="building" points="200,250 320,250 320,330 200,330" />
+            <text x="245" y="295" class="building-label">MC</text>
+
+            <polygon id="poly-dp" class="building" points="280,580 360,580 360,660 280,660" />
+            <text x="310" y="625" class="building-label">DP</text>
+
+            <polygon id="poly-stc" class="building" points="480,450 560,450 560,530 480,530" />
+            <text x="505" y="495" class="building-label">STC</text>
+            
+            <circle id="dot-cmh" cx="670" cy="830" r="8" class="poi-dot" />
+            <circle id="dot-mc" cx="260" cy="330" r="8" class="poi-dot" />
+            <circle id="dot-dp" cx="320" cy="580" r="8" class="poi-dot" />
+            <circle id="dot-stc" cx="520" cy="530" r="8" class="poi-dot" />
         </svg>
     </div>
 
     <div class="content-container">
         
-        <div class="section" id="dorm">
+        <div class="section" id="cmh-start" data-map-target="cmh">
             <h1>Alexander Li</h1>
-            <h2>Computing & Financial Management @ UWaterloo</h2>
-            <p>Welcome to my campus route. I bridge the gap between software engineering and quantitative finance. I build scalable systems, analyze complex datasets, and develop algorithms that solve real-world financial problems.</p>
+            <h2>Starting the Day @ CMH</h2>
+            <p>I'm a Computing and Financial Management (CFM) student at UWaterloo. My day starts here at Claudette Millar Hall, before heading across campus to bridge the gap between software engineering and quantitative finance.</p>
             <div class="tech-stack">
                 <span class="tag">Python</span>
                 <span class="tag">C++</span>
@@ -57,43 +65,38 @@
             </div>
         </div>
 
-        <div class="section" id="math-building">
+        <div class="section" id="mc" data-map-target="mc">
             <h1>The Math & CS Hub</h1>
-            <h2>Academics & Core Fundamentals</h2>
-            <p>My foundation is built on rigorous coursework combining computer science and corporate finance. This dual approach allows me to understand both the underlying math of financial markets and the architecture needed to support them.</p>
+            <h2>Academics @ MC</h2>
+            <p>The first stop is the Mathematics & Computer building. This is where the foundation is built: understanding both the underlying math of financial markets and the architecture needed to support scalable systems.</p>
             <ul>
-                <li><strong>Computer Science:</strong> Data Structures, Object-Oriented Software Development, Algorithms.</li>
-                <li><strong>Finance:</strong> Corporate Finance, Financial Markets, Quantitative Analysis.</li>
+                <li><strong>Computer Science:</strong> Data Structures, Algorithms, Object-Oriented Software.</li>
+                <li><strong>Finance:</strong> Corporate Finance, Quantitative Analysis.</li>
             </ul>
-            <a href="#" class="link-btn">View Full Resume</a>
         </div>
 
-        <div class="section" id="lab">
-            <h1>The Developer Lab</h1>
-            <h2>Software & FinTech Projects</h2>
-            <p>Moving from theory to execution. This is where I spend my time engineering applications and backtesting strategies.</p>
-            <ul>
-                <li><strong>Algorithmic Trading Engine:</strong> Built a backtesting framework in Python connecting to historical market APIs, optimizing for Sharpe ratio and risk management.</li>
-                <li><strong>Full-Stack Financial Dashboard:</strong> Developed a React and Node.js web app allowing users to track portfolio metrics and simulate compound growth over time.</li>
-            </ul>
-            <div class="tech-stack">
-                <span class="tag">Pandas</span>
-                <span class="tag">NumPy</span>
-                <span class="tag">Node.js</span>
-            </div>
-        </div>
-
-        <div class="section" id="library">
+        <div class="section" id="dp" data-map-target="dp">
             <h1>Dana Porter Library</h1>
-            <h2>Research & Data Analysis</h2>
-            <p>The quiet zone for deep work. I regularly dive into financial datasets to model market microstructures and evaluate the viability of statistical arbitrage opportunities.</p>
-            <p>Currently researching the impact of macroeconomic indicators on short-term volatility in equity markets.</p>
+            <h2>Research & Data @ DP</h2>
+            <p>Moving across the Arts quad to DP for deep work. I regularly dive into financial datasets here to model market microstructures and evaluate statistical arbitrage opportunities.</p>
+            <ul>
+                <li><strong>Algorithmic Trading Engine:</strong> Built a backtesting framework in Python connecting to historical market APIs.</li>
+            </ul>
         </div>
 
-        <div class="section" id="slc">
-            <h1>Student Life Centre</h1>
-            <h2>Community & Contact</h2>
-            <p>Outside of code and finance, I am actively involved in the UWaterloo community through the UW Finance Association and various hackathons.</p>
+        <div class="section" id="stc" data-map-target="stc">
+            <h1>Science Teaching Complex</h1>
+            <h2>Collaboration @ STC</h2>
+            <p>Heading over to STC for project meetings and development. This is where theory turns into full-stack execution, working alongside peers on FinTech applications.</p>
+            <ul>
+                <li><strong>Financial Dashboard:</strong> Developed a React and Node.js web app allowing users to track portfolio metrics in real-time.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="cmh-end" data-map-target="cmh">
+            <h1>Full Circle</h1>
+            <h2>Wrapping up @ CMH</h2>
+            <p>Back at the dorm to wrap up the day. Outside of code and finance, I am actively involved in the UWaterloo community through the UW Finance Association.</p>
             <p>Let's build something great together.</p>
             <ul>
                 <li><strong>LinkedIn:</strong> linkedin.com/in/alexander-li</li>
