@@ -1,211 +1,105 @@
 :root {
     --bg-color: #0a0e17;
-    --surface-color: #111827;
     --text-primary: #f3f4f6;
     --text-secondary: #9ca3af;
-    --accent-finance: #10b981; /* FinTech Green */
-    --accent-tech: #3b82f6; /* Tech Blue */
+    --accent-finance: #10b981; 
+    --accent-tech: #3b82f6; 
     --grid-color: rgba(59, 130, 246, 0.1);
 }
 
-* {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
+* { box-sizing: border-box; scroll-behavior: smooth; }
 
 body, html {
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     background-color: var(--bg-color);
     color: var(--text-primary);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    overflow-x: hidden;
+    font-family: 'Inter', -apple-system, sans-serif;
 }
 
-/* Blueprint Grid Background for the Map Container */
-.map-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 50vw;
-    height: 100vh;
-    background-image: 
-        linear-gradient(var(--grid-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-    background-size: 40px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Navigation */
 nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 50vw;
-    background: rgba(10, 14, 23, 0.85);
-    backdrop-filter: blur(10px);
-    padding: 20px 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    z-index: 100;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: fixed; top: 0; left: 0; width: 100vw;
+    background: rgba(10, 14, 23, 0.6); backdrop-filter: blur(10px);
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
-nav a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 600;
-    transition: color 0.3s ease;
+.logo { font-weight: bold; letter-spacing: 2px; color: var(--text-primary); }
+.nav-links { display: flex; gap: 20px; }
+nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; transition: color 0.3s; }
+nav a.active, nav a:hover { color: var(--accent-finance); }
+
+/* SVG Map */
+.map-container {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    display: flex; align-items: center; justify-content: center; z-index: 1;
 }
-nav a:hover, nav a.active {
-    color: var(--accent-finance);
+svg { width: 90%; height: 90%; max-width: 1200px; }
+
+.bg-building { fill: rgba(17, 24, 39, 0.6); stroke: rgba(59, 130, 246, 0.1); stroke-width: 1; }
+.ring-road-guide { fill: none; stroke: rgba(59, 130, 246, 0.08); stroke-width: 20; }
+
+.building { fill: rgba(17, 24, 39, 0.9); stroke: #1f2937; stroke-width: 2; transition: all 0.5s ease; position: relative; z-index: 10; }
+.building.active { stroke: var(--accent-finance); fill: rgba(16, 185, 129, 0.1); filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4)); }
+.building-label { fill: var(--text-secondary); font-size: 14px; font-family: monospace; transition: fill 0.3s; }
+.building.active + .building-label { fill: var(--text-primary); font-weight: bold; }
+
+.campus-path { fill: none; stroke: var(--accent-finance); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6)); }
+.poi-dot { fill: var(--bg-color); stroke: var(--text-secondary); stroke-width: 3; transition: all 0.4s ease; }
+.poi-dot.active { stroke: var(--accent-tech); fill: var(--accent-tech); r: 10; filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8)); }
+
+/* Scroll Logic */
+.scroll-track { position: relative; width: 100vw; z-index: 2; }
+.scroll-trigger { height: 100vh; width: 100%; pointer-events: none; }
+
+/* --- THE TICKET UI --- */
+.ui-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 50; }
+
+.popup-ticket {
+    position: absolute; /* Controlled by JS */
+    width: 320px;
+    background: rgba(13, 17, 23, 0.85); backdrop-filter: blur(8px);
+    border: 1px dashed var(--accent-finance);
+    border-left: 6px solid var(--accent-finance); /* Ticket Spine */
+    border-radius: 4px; padding: 25px;
+    opacity: 0;
+    transform: translateX(30px); /* Slides in */
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* SVG Map Styling */
-svg {
-    width: 90%;
-    height: 90%;
-    /* Removed overall drop shadow to keep background subtle */
-}
+.popup-ticket.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
 
-/* NEW: Background Blueprint Buildings (Inactive context) */
-.bg-building {
-    fill: rgba(17, 24, 39, 0.8); /* Very dark, slightly transparent fill */
-    stroke: rgba(59, 130, 246, 0.15); /* Faint blue stroke */
-    stroke-width: 1;
-}
-/* Updated Ring Road Guide Style */
-.ring-road-guide {
-    fill: none;
-    stroke: rgba(59, 130, 246, 0.1); /* Very faint */
-    stroke-width: 15;
-}
-
-/* The Active Target Buildings */
-.building {
-    fill: var(--surface-color);
-    stroke: #1f2937;
-    stroke-width: 2;
-    transition: all 0.5s ease;
-    /* Ensure these sit visually above background */
-    position: relative; 
-    z-index: 10;
-}
-.building.active {
-    stroke: var(--accent-finance);
-    fill: rgba(16, 185, 129, 0.1);
-    filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4));
-}
-.building-label {
-    fill: var(--text-secondary);
-    font-size: 14px;
-    font-family: monospace;
-    transition: fill 0.3s ease;
-}
-.building.active + .building-label {
-    fill: var(--text-primary);
-    font-weight: bold;
-}
-
-/* The Animated Path */
-.campus-path {
-    fill: none;
-    stroke: var(--accent-finance);
-    stroke-width: 4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
-}
-.poi-dot {
-    fill: var(--bg-color);
-    stroke: var(--text-secondary);
-    stroke-width: 3;
-    transition: all 0.4s ease;
-}
-.poi-dot.active {
-    stroke: var(--accent-tech);
-    fill: var(--accent-tech);
-    r: 10;
-    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
-}
-
-/* Content Container */
-.content-container {
-    margin-left: 50vw;
-    width: 50vw;
-    position: relative;
-    z-index: 2;
-}
-
-.section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 100px 10%;
-    opacity: 0.3;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    transform: translateY(20px);
-}
-.section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Typography */
-h1 {
-    font-size: 3rem;
-    margin-bottom: 5px;
-    background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-h2 {
-    color: var(--accent-tech);
-    font-size: 1.2rem;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: monospace;
-}
-p, li {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: var(--text-secondary);
-}
-.tech-stack {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-.tag {
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--accent-tech);
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-family: monospace;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-}
-.link-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 24px;
+/* The Line Connecting the Ticket to the Map Dot */
+.popup-ticket::before {
+    content: ''; position: absolute;
+    top: 40px; left: -46px; /* Sticks out the left side */
+    width: 40px; height: 2px;
     background: var(--accent-finance);
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-    transition: background 0.3s ease;
+    box-shadow: 0 0 5px var(--accent-finance);
 }
-.link-btn:hover {
-    background: #0ea5e9;
+
+/* If the ticket is forced to the left of the point, flip the line */
+.popup-ticket.flip-left { transform: translateX(-30px); border-left: 1px dashed var(--accent-finance); border-right: 6px solid var(--accent-finance); }
+.popup-ticket.flip-left.active { transform: translateX(0); }
+.popup-ticket.flip-left::before { left: auto; right: -46px; }
+
+/* Ticket Content Formatting */
+.ticket-header { color: var(--accent-tech); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-family: monospace; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; margin-bottom: 10px; }
+.popup-ticket h1 { font-size: 1.8rem; margin: 0 0 10px 0; }
+.popup-ticket p { font-size: 0.95rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 20px; }
+
+.redirect-btn {
+    display: block; text-align: center; padding: 10px;
+    background: rgba(16, 185, 129, 0.1); color: var(--accent-finance);
+    text-decoration: none; font-weight: bold; font-family: monospace;
+    border: 1px solid var(--accent-finance); border-radius: 4px; transition: 0.3s;
 }
+.redirect-btn:hover { background: var(--accent-finance); color: #000; }
+
+/* New City Roads */
+.city-road { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 14; }
+.road-label { fill: rgba(255, 255, 255, 0.2); font-size: 11px; font-family: monospace; letter-spacing: 1px; }
+
+/* Adjusted Ring Road to look distinct from City Roads */
+.ring-road-guide { fill: none; stroke: rgba(59, 130, 246, 0.1); stroke-width: 10; border-radius: 50%; }

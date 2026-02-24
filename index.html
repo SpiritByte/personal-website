@@ -5,106 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alexander Li | CFM Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* A few extra styles to support the new map details */
+        .water-feature { fill: none; stroke: rgba(59, 130, 246, 0.15); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+        .bridge { fill: rgba(17, 24, 39, 0.9); stroke: rgba(59, 130, 246, 0.4); stroke-width: 2; }
+    </style>
 </head>
 <body>
 
     <nav>
-        <a href="#cmh-start" class="nav-link" data-target="cmh-start">Start</a>
-        <a href="#mc" class="nav-link" data-target="mc">MC</a>
-        <a href="#dp" class="nav-link" data-target="dp">Dana Porter</a>
-        <a href="#stc" class="nav-link" data-target="stc">STC</a>
-        <a href="#cmh-end" class="nav-link" data-target="cmh-end">Contact</a>
+        <div class="logo">ALEXANDER LI</div>
+        <div class="nav-links">
+            <a href="#cmh-start" class="nav-link" data-target="cmh-start">Start</a>
+            <a href="#mc" class="nav-link" data-target="mc">MC</a>
+            <a href="#dp" class="nav-link" data-target="dp">DP</a>
+            <a href="#stc" class="nav-link" data-target="stc">STC</a>
+            <a href="#cmh-end" class="nav-link" data-target="cmh-end">Contact</a>
+        </div>
     </nav>
 
     <div class="map-container">
-        <svg viewBox="0 0 800 1000">
+        <svg viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid meet">
             
-            <polygon class="bg-building" points="250,200 550,200 650,400 600,700 200,700 150,400" />
+            <path class="water-feature" d="M 50 350 Q 150 400 120 500 T 150 700 Q 180 850 100 950" />
+            <path class="water-feature" d="M 120 500 Q 250 520 200 600" />
+
+            <path class="city-road" d="M 20 120 L 780 120" />
+            <text x="40" y="110" class="road-label">Columbia St W</text>
             
-            <polygon class="bg-building" points="680,250 780,250 780,600 680,550" />
+            <path class="city-road" d="M 20 840 L 720 840" />
+            <text x="40" y="830" class="road-label">University Ave W</text>
             
-            <polygon class="bg-building" points="50,550 180,550 220,800 50,800" />
-             
-            <polygon class="bg-building" points="600,750 780,750 780,950 600,950" />
+            <path class="city-road" d="M 720 50 L 720 840" />
+            <text x="730" y="150" class="road-label" transform="rotate(90, 730, 150)">Phillip St</text>
 
-            <path class="ring-road-guide" d="M 400 150 C 650 150, 750 400, 650 750 C 550 950, 250 950, 150 750 C 50 400, 150 150, 400 150 Z" />
+            <path class="city-road" d="M 600 50 L 600 950" stroke-dasharray="10, 10" style="stroke: rgba(255,255,255,0.03); stroke-width: 6;" />
 
-
-            <path id="route-path" class="campus-path" d="M 670 830 Q 550 600 260 330 Q 230 450 320 580 Q 400 580 520 530 Q 600 700 670 830" />
-
-            <polygon id="poly-cmh" class="building" points="630,830 710,830 710,890 630,890" />
-            <text x="655" y="865" class="building-label">CMH</text>
-
-            <polygon id="poly-mc" class="building" points="200,250 320,250 320,330 200,330" />
-            <text x="245" y="295" class="building-label">MC</text>
-
-            <polygon id="poly-dp" class="building" points="280,580 360,580 360,660 280,660" />
-            <text x="310" y="625" class="building-label">DP</text>
-
-            <polygon id="poly-stc" class="building" points="480,450 560,450 560,530 480,530" />
-            <text x="505" y="495" class="building-label">STC</text>
+            <path class="ring-road-guide" d="M 450 200 C 250 160, 200 220, 180 350 C 160 500, 150 750, 300 780 C 450 800, 560 750, 580 500 C 600 300, 550 200, 450 200 Z" />
             
-            <circle id="dot-cmh" cx="670" cy="830" r="8" class="poi-dot" />
-            <circle id="dot-mc" cx="260" cy="330" r="8" class="poi-dot" />
-            <circle id="dot-dp" cx="320" cy="580" r="8" class="poi-dot" />
-            <circle id="dot-stc" cx="520" cy="530" r="8" class="poi-dot" />
+            <polygon class="bg-building" points="140,260 210,300 170,360 100,320" />
+            <polygon class="bg-building" points="170,360 210,300 250,330 220,380 240,400 210,410" />
+            <polygon class="bg-building" points="50,450 90,450 90,520 50,520" />
+            <polygon class="bg-building" points="60,550 120,550 120,600 60,600" />
+            
+            <polygon class="bg-building" points="360,210 420,210 440,260 380,260" />
+            <polygon class="bg-building" points="360,320 440,320 440,360 410,360 410,390 380,390 380,410 360,410" />
+            <text x="380" y="350" class="building-label" style="fill: rgba(255,255,255,0.2);">DC</text>
+
+            <polygon class="bg-building" points="260,380 320,380 320,410 280,410 280,450 260,450" />
+            <polygon class="bg-building" points="230,460 260,460 260,510 230,510" />
+            <polygon class="bg-building" points="380,460 430,460 430,510 380,510" />
+            <polygon class="bg-building" points="370,520 420,520 420,560 370,560" />
+            <polygon class="bg-building" points="430,490 520,490 520,530 430,530" />
+            <polygon class="bg-building" points="430,540 480,540 480,620 430,620" />
+            <polygon class="bg-building" points="490,580 540,580 540,640 490,640" />
+
+            <polygon class="bg-building" points="630,350 690,350 690,420 630,420" />
+            <polygon class="bg-building" points="630,430 690,430 690,490 630,490" />
+            <polygon class="bg-building" points="700,440 750,440 750,490 700,490" />
+            <polygon class="bg-building" points="710,370 760,370 760,420 710,420" />
+            <polygon class="bridge" points="530,400 630,400 630,415 530,415" />
+
+            <path class="bg-building" d="M 210 710 Q 250 780 290 710 L 270 690 Q 250 740 230 690 Z" />
+            <polygon class="bg-building" points="210,630 250,630 250,680 210,680" />
+            <polygon class="bg-building" points="260,650 300,650 300,690 260,690" />
+            <polygon class="bg-building" points="260,590 310,590 310,630 260,630" />
+            <polygon class="bg-building" points="360,660 400,660 400,720 360,720" />
+            <polygon class="bg-building" points="420,680 470,680 470,730 420,730" />
+
+            <polygon class="bg-building" points="730,750 780,750 780,820 760,820 760,770 750,770 750,820 730,820" />
+            <polygon class="bg-building" points="630,650 650,650 650,680 680,680 680,650 700,650 700,720 680,720 680,700 650,700 650,720 630,720" />
+            <polygon class="bg-building" points="710,650 730,650 730,680 760,680 760,650 780,650 780,720 760,720 760,700 730,700 730,720 710,720" />
+            <polygon class="bg-building" points="620,750 640,750 640,820 620,820" />
+            <polygon class="bg-building" points="690,750 720,750 720,800 690,800" />
+
+
+            <path id="route-path" class="campus-path" d="M 665 770 C 550 750, 480 500, 380 430 C 350 410, 270 410, 325 350 C 250 400, 260 550, 340 580 C 320 560, 280 520, 290 480 C 400 480, 500 600, 665 770" />
+
+            <polygon id="poly-cmh" class="building" points="650,760 680,760 680,820 650,820" />
+            <text x="653" y="795" class="building-label">CMH</text>
+
+            <polygon id="poly-mc" class="building" points="300,320 350,320 350,380 300,380" />
+            <text x="315" y="355" class="building-label">MC</text>
+
+            <polygon id="poly-dp" class="building" points="320,560 360,560 360,600 320,600" />
+            <text x="330" y="585" class="building-label">DP</text>
+
+            <polygon id="poly-stc" class="building" points="270,460 320,460 320,510 270,510" />
+            <text x="280" y="490" class="building-label">STC</text>
+            
+            <circle id="dot-cmh" cx="665" cy="770" r="8" class="poi-dot" />
+            <circle id="dot-mc" cx="325" cy="350" r="8" class="poi-dot" />
+            <circle id="dot-dp" cx="340" cy="580" r="8" class="poi-dot" />
+            <circle id="dot-stc" cx="290" cy="480" r="8" class="poi-dot" />
         </svg>
     </div>
 
-    <div class="content-container">
-        
-        <div class="section" id="cmh-start" data-map-target="cmh">
-            <h1>Alexander Li</h1>
-            <h2>Starting the Day @ CMH</h2>
-            <p>I'm a Computing and Financial Management (CFM) student at UWaterloo. My day starts here at Claudette Millar Hall, before heading across campus to bridge the gap between software engineering and quantitative finance.</p>
-            <div class="tech-stack">
-                <span class="tag">Python</span>
-                <span class="tag">C++</span>
-                <span class="tag">SQL</span>
-                <span class="tag">React</span>
-            </div>
+    <div class="ui-layer">
+        <div class="popup-ticket" id="card-cmh-start">
+            <div class="ticket-header">Departure</div>
+            <h1>CMH Dorm</h1>
+            <p>I bridge the gap between software engineering and quantitative finance. My day starts here.</p>
+            <a href="about.html" class="redirect-btn">Read About Me →</a>
         </div>
 
-        <div class="section" id="mc" data-map-target="mc">
-            <h1>The Math & CS Hub</h1>
-            <h2>Academics @ MC</h2>
-            <p>The first stop is the Mathematics & Computer building. This is where the foundation is built: understanding both the underlying math of financial markets and the architecture needed to support scalable systems.</p>
-            <ul>
-                <li><strong>Computer Science:</strong> Data Structures, Algorithms, Object-Oriented Software.</li>
-                <li><strong>Finance:</strong> Corporate Finance, Quantitative Analysis.</li>
-            </ul>
+        <div class="popup-ticket" id="card-mc">
+            <div class="ticket-header">Stop 01</div>
+            <h1>MC Hub</h1>
+            <p>Where the foundation is built. Algorithms, Data Structures, and Quantitative Analysis.</p>
+            <a href="academics.html" class="redirect-btn">View Academics →</a>
         </div>
 
-        <div class="section" id="dp" data-map-target="dp">
-            <h1>Dana Porter Library</h1>
-            <h2>Research & Data @ DP</h2>
-            <p>Moving across the Arts quad to DP for deep work. I regularly dive into financial datasets here to model market microstructures and evaluate statistical arbitrage opportunities.</p>
-            <ul>
-                <li><strong>Algorithmic Trading Engine:</strong> Built a backtesting framework in Python connecting to historical market APIs.</li>
-            </ul>
+        <div class="popup-ticket" id="card-dp">
+            <div class="ticket-header">Stop 02</div>
+            <h1>Dana Porter</h1>
+            <p>Diving into financial datasets to model market microstructures and evaluate arbitrage.</p>
+            <a href="projects.html" class="redirect-btn">Trading Engines →</a>
         </div>
 
-        <div class="section" id="stc" data-map-target="stc">
-            <h1>Science Teaching Complex</h1>
-            <h2>Collaboration @ STC</h2>
-            <p>Heading over to STC for project meetings and development. This is where theory turns into full-stack execution, working alongside peers on FinTech applications.</p>
-            <ul>
-                <li><strong>Financial Dashboard:</strong> Developed a React and Node.js web app allowing users to track portfolio metrics in real-time.</li>
-            </ul>
+        <div class="popup-ticket" id="card-stc">
+            <div class="ticket-header">Stop 03</div>
+            <h1>STC Labs</h1>
+            <p>Turning theory into full-stack execution. Developing React and Node.js web applications.</p>
+            <a href="projects.html" class="redirect-btn">View Web Apps →</a>
         </div>
 
-        <div class="section" id="cmh-end" data-map-target="cmh">
-            <h1>Full Circle</h1>
-            <h2>Wrapping up @ CMH</h2>
-            <p>Back at the dorm to wrap up the day. Outside of code and finance, I am actively involved in the UWaterloo community through the UW Finance Association.</p>
-            <p>Let's build something great together.</p>
-            <ul>
-                <li><strong>LinkedIn:</strong> linkedin.com/in/alexander-li</li>
-                <li><strong>GitHub:</strong> github.com/alexander-li</li>
-            </ul>
-            <a href="mailto:contact@example.com" class="link-btn">Get In Touch</a>
+        <div class="popup-ticket" id="card-cmh-end">
+            <div class="ticket-header">Arrival</div>
+            <h1>CMH Return</h1>
+            <p>Back at the dorm to wrap up. Let's connect and build something great together.</p>
+            <a href="contact.html" class="redirect-btn">Get In Touch →</a>
         </div>
+    </div>
 
+    <div class="scroll-track">
+        <div class="scroll-trigger" id="cmh-start" data-map-target="cmh"></div>
+        <div class="scroll-trigger" id="mc" data-map-target="mc"></div>
+        <div class="scroll-trigger" id="dp" data-map-target="dp"></div>
+        <div class="scroll-trigger" id="stc" data-map-target="stc"></div>
+        <div class="scroll-trigger" id="cmh-end" data-map-target="cmh"></div>
     </div>
 
     <script src="script.js"></script>
