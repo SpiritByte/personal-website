@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. Path Drawing Logic ---
     const path = document.getElementById('route-path');
     if (path) {
         const pathLength = path.getTotalLength();
@@ -14,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. Intersection Observer (Triggers Popups & Calculates Positions) ---
     const triggers = document.querySelectorAll('.scroll-trigger');
     const navLinks = document.querySelectorAll('.nav-link');
     const popupTickets = document.querySelectorAll('.popup-ticket');
