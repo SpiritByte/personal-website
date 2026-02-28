@@ -6,6 +6,7 @@
     <title>Alexander Li | CFM Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* A few extra styles to support the new map details */
         .water-feature { fill: none; stroke: rgba(59, 130, 246, 0.15); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
         .bridge { fill: rgba(17, 24, 39, 0.9); stroke: rgba(59, 130, 246, 0.4); stroke-width: 2; }
     </style>
@@ -24,7 +25,7 @@
     </nav>
 
     <div class="map-container">
-        <svg viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid meet">
             
             <path class="water-feature" d="M 50 350 Q 150 400 120 500 T 150 700 Q 180 850 100 950" />
             <path class="water-feature" d="M 120 500 Q 250 520 200 600" />
@@ -148,3 +149,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
