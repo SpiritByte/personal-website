@@ -28,17 +28,23 @@ nav {
 nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; transition: color 0.3s; }
 nav a.active, nav a:hover { color: var(--accent-finance); }
 
-/* SVG Map */
+/* SVG Map - Updated to cover the screen */
 .map-container {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    position: fixed; top: 0; left: 0; 
+    width: 100vw; height: 100vh;
     background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 40px 40px;
-    display: flex; align-items: center; justify-content: center; z-index: 1;
+    z-index: 1;
 }
-svg { width: 90%; height: 90%; max-width: 1200px; }
+
+svg { 
+    width: 100%; 
+    height: 100%; 
+    display: block; /* Removes any inline spacing */
+}
 
 .bg-building { fill: rgba(17, 24, 39, 0.6); stroke: rgba(59, 130, 246, 0.1); stroke-width: 1; }
-.ring-road-guide { fill: none; stroke: rgba(59, 130, 246, 0.08); stroke-width: 20; }
+.ring-road-guide { fill: none; stroke: rgba(59, 130, 246, 0.1); stroke-width: 10; border-radius: 50%; }
 
 .building { fill: rgba(17, 24, 39, 0.9); stroke: #1f2937; stroke-width: 2; transition: all 0.5s ease; position: relative; z-index: 10; }
 .building.active { stroke: var(--accent-finance); fill: rgba(16, 185, 129, 0.1); filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4)); }
@@ -49,42 +55,37 @@ svg { width: 90%; height: 90%; max-width: 1200px; }
 .poi-dot { fill: var(--bg-color); stroke: var(--text-secondary); stroke-width: 3; transition: all 0.4s ease; }
 .poi-dot.active { stroke: var(--accent-tech); fill: var(--accent-tech); r: 10; filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8)); }
 
-/* Scroll Logic */
 .scroll-track { position: relative; width: 100vw; z-index: 2; }
 .scroll-trigger { height: 100vh; width: 100%; pointer-events: none; }
 
-/* --- THE TICKET UI --- */
 .ui-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 50; }
 
 .popup-ticket {
-    position: absolute; /* Controlled by JS */
+    position: absolute;
     width: 320px;
     background: rgba(13, 17, 23, 0.85); backdrop-filter: blur(8px);
     border: 1px dashed var(--accent-finance);
-    border-left: 6px solid var(--accent-finance); /* Ticket Spine */
+    border-left: 6px solid var(--accent-finance);
     border-radius: 4px; padding: 25px;
     opacity: 0;
-    transform: translateX(30px); /* Slides in */
+    transform: translateX(30px);
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .popup-ticket.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
 
-/* The Line Connecting the Ticket to the Map Dot */
 .popup-ticket::before {
     content: ''; position: absolute;
-    top: 40px; left: -46px; /* Sticks out the left side */
+    top: 40px; left: -46px;
     width: 40px; height: 2px;
     background: var(--accent-finance);
     box-shadow: 0 0 5px var(--accent-finance);
 }
 
-/* If the ticket is forced to the left of the point, flip the line */
 .popup-ticket.flip-left { transform: translateX(-30px); border-left: 1px dashed var(--accent-finance); border-right: 6px solid var(--accent-finance); }
 .popup-ticket.flip-left.active { transform: translateX(0); }
 .popup-ticket.flip-left::before { left: auto; right: -46px; }
 
-/* Ticket Content Formatting */
 .ticket-header { color: var(--accent-tech); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-family: monospace; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; margin-bottom: 10px; }
 .popup-ticket h1 { font-size: 1.8rem; margin: 0 0 10px 0; }
 .popup-ticket p { font-size: 0.95rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 20px; }
@@ -97,9 +98,5 @@ svg { width: 90%; height: 90%; max-width: 1200px; }
 }
 .redirect-btn:hover { background: var(--accent-finance); color: #000; }
 
-/* New City Roads */
 .city-road { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 14; }
 .road-label { fill: rgba(255, 255, 255, 0.2); font-size: 11px; font-family: monospace; letter-spacing: 1px; }
-
-/* Adjusted Ring Road to look distinct from City Roads */
-.ring-road-guide { fill: none; stroke: rgba(59, 130, 246, 0.1); stroke-width: 10; border-radius: 50%; }
